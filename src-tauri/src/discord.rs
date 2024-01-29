@@ -131,17 +131,34 @@ pub fn initialize_drpc() {
                     "Unable to get server name".to_string()
                 };
 
-                let activity = activity::Activity::new()
-                    .state(full_server_address.as_str())
-                    .details(hostname.as_str())
-                    .assets(
-                        activity::Assets::new()
-                            .large_image("https://github.com/Rise-Indonesia/RiseResource/blob/main/banner4.jpg?raw=true")
-                            .large_text(nick_name_detail.as_str())
-                            .small_image("players")
-                            .small_text(players.as_str()),
-                    )
-                    .timestamps(timestamp.clone().start(start_time.try_into().unwrap()));
+                let words: Vec<&str> = my_string.split_whitespace().collect();
+                let risehostname = "Rise";
+                if words.contains(&risehostname) {
+                    let activity = activity::Activity::new()
+                        .state(full_server_address.as_str())
+                        .details(hostname.as_str())
+                        .assets(
+                            activity::Assets::new()
+                                .large_image("https://github.com/Rise-Indonesia/RiseResource/blob/main/logoRise.jpg?raw=true")
+                                .large_text(nick_name_detail.as_str())
+                                .small_image("players")
+                                .small_text(players.as_str()),
+                        )
+                        .timestamps(timestamp.clone().start(start_time.try_into().unwrap()));
+                        
+                } else {                        
+                    let activity = activity::Activity::new()
+                        .state(full_server_address.as_str())
+                        .details(hostname.as_str())
+                        .assets(
+                            activity::Assets::new()
+                                .large_image("logo")
+                                .large_text(nick_name_detail.as_str())
+                                .small_image("players")
+                                .small_text(players.as_str()),
+                        )
+                        .timestamps(timestamp.clone().start(start_time.try_into().unwrap()));
+                }
 
                 match client.set_activity(activity) {
                     Ok(_) => {}
@@ -168,7 +185,7 @@ pub fn initialize_drpc() {
                     .details("In Launcher")
                     .assets(
                         activity::Assets::new()
-                            .large_image("https://github.com/Rise-Indonesia/RiseResource/blob/main/banner4.jpg?raw=true")
+                            .large_image("logo")
                             .large_text("Idle"),
                     )
                     .timestamps(timestamp.clone().start(start_time.try_into().unwrap()));
