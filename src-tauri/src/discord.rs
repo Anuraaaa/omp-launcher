@@ -136,7 +136,7 @@ pub fn initialize_drpc() {
                     .details(hostname.as_str())
                     .assets(
                         activity::Assets::new()
-                            .large_image("logo")
+                            .large_image("https://github.com/Rise-Indonesia/RiseResource/blob/main/banner4.jpg?raw=true")
                             .large_text(nick_name_detail.as_str())
                             .small_image("players")
                             .small_text(players.as_str()),
@@ -168,7 +168,7 @@ pub fn initialize_drpc() {
                     .details("In Launcher")
                     .assets(
                         activity::Assets::new()
-                            .large_image("logo")
+                            .large_image("https://github.com/Rise-Indonesia/RiseResource/blob/main/banner4.jpg?raw=true")
                             .large_text("Idle"),
                     )
                     .timestamps(timestamp.clone().start(start_time.try_into().unwrap()));
