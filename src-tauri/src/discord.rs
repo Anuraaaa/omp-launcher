@@ -146,6 +146,19 @@ pub fn initialize_drpc() {
                         )
                         .timestamps(timestamp.clone().start(start_time.try_into().unwrap()));
                         
+                    match client.set_activity(activity) {
+                        Ok(_) => {}
+                        Err(_) => {
+                            match client.reconnect() {
+                                Ok(_) => {
+                                    connected = true;
+                                }
+                                Err(_) => {
+                                    connected = false;
+                                }
+                            };
+                        }
+                    };
                 } else {                        
                     let activity = activity::Activity::new()
                         .state(full_server_address.as_str())
@@ -158,21 +171,21 @@ pub fn initialize_drpc() {
                                 .small_text(players.as_str()),
                         )
                         .timestamps(timestamp.clone().start(start_time.try_into().unwrap()));
-                }
 
-                match client.set_activity(activity) {
-                    Ok(_) => {}
-                    Err(_) => {
-                        match client.reconnect() {
-                            Ok(_) => {
-                                connected = true;
-                            }
-                            Err(_) => {
-                                connected = false;
-                            }
-                        };
-                    }
-                };
+                    match client.set_activity(activity) {
+                        Ok(_) => {}
+                        Err(_) => {
+                            match client.reconnect() {
+                                Ok(_) => {
+                                    connected = true;
+                                }
+                                Err(_) => {
+                                    connected = false;
+                                }
+                            };
+                        }
+                    };        
+                }
             } else {
                 if in_game {
                     in_game = false;
