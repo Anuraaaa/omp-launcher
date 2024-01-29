@@ -131,7 +131,7 @@ pub fn initialize_drpc() {
                     "Unable to get server name".to_string()
                 };
 
-                let words: Vec<&str> = my_string.split_whitespace().collect();
+                let words: Vec<&str> = hostname.as_str().split_whitespace().collect();
                 let risehostname = "Rise";
                 if words.contains(&risehostname) {
                     let activity = activity::Activity::new()
